@@ -1,0 +1,17 @@
+How to deploy a npm package module
+
+Run npm init
+
+Intialize the package name and version and all other things , package.json file will be created.
+
+create a file and write the functions and export the same.
+
+create a profile in npm
+
+npm adduser
+
+npm login
+
+npm publish --access public
+
+your package will be published. You can use it any project by installing the package from Npm official website.

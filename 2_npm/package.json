@@ -1,0 +1,16 @@
+{
+  "name": "2_npm",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@iampooja/scaler_calc": "^1.1.0",
+    "figlet": "^1.6.0"
+  }
+}
