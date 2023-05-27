@@ -1,4 +1,7 @@
 const express = require("express");
+const { firstMiddleware } = require("./middlewares/middle1");
+const { secondMiddleware } = require("./middlewares/middle2");
+const morgan = require("morgan");
 const app = express();
 
 const PORT = 8080 || process.env.PORT;
@@ -11,6 +14,12 @@ let courses = [
 
 // middleware
 app.use(express.json());
+
+// HTTP request logger middleware for node.js
+app.use(morgan("tiny"));
+
+app.use(firstMiddleware);
+app.use(secondMiddleware);
 
 app.get("/", (req, res) => {
   res.send("Hello from Scaler Topics");
