@@ -16,15 +16,30 @@ function processOrder(order) {
   });
 }
 
-placeOrder("coffee")
-  .then((res) => {
-    console.log(res);
-    let orderIsProcessed = processOrder(res);
-    return orderIsProcessed;
-  })
-  .then((processedOrder) => {
+// placeOrder("coffee")
+//   .then((res) => {
+//     console.log(res);
+//     let orderIsProcessed = processOrder(res);
+//     return orderIsProcessed;
+//   })
+//   .then((processedOrder) => {
+//     console.log(processedOrder);
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
+
+// Async Await
+
+async function serveOrder() {
+  try {
+    let orderPlaced = await placeOrder("coffee");
+    console.log(orderPlaced);
+    let processedOrder = await processOrder(orderPlaced);
     console.log(processedOrder);
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+serveOrder();
