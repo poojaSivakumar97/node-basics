@@ -42,8 +42,8 @@ const Course = mongoose.model("Course", courseSchema);
 async function addCourse() {
   const course = new Course({
     name: "chat Gpt",
-    tags: ["AI"],
-    // category: "AI",
+    tags: ["AI", "SE"],
+    category: "AI",
     creator: "Q",
     isPublished: false,
   });
