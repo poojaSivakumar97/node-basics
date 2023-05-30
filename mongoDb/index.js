@@ -5,16 +5,34 @@ mongoose
     console.log(`MongoDb connected Successfully !`);
   })
   .catch((e) => {
-    console.error(`Could not connect to mongoDb ,${e}`);
+    // console.error(`Could not connect to mongoDb ,${e}`);
   });
 
 //   schema
 const courseSchema = new mongoose.Schema({
-  name: String,
-  creator: String,
+  name: { type: String, required: true },
+  tags: {
+    type: Array,
+    validate: {
+      validator: function (tags) {
+        return tags.length > 1;
+      },
+    },
+  },
+  category: {
+    type: String,
+    required: true,
+    enum: ["Data science", "Language", "AI", "DBMS", "Backend"],
+  },
+  creator: { type: String, required: true },
   publishedDate: { type: Date, default: Date.now },
-  isPublished: Boolean,
-  rating: Number,
+  isPublished: { type: Boolean, required: true },
+  rating: {
+    type: Number,
+    required: function () {
+      return this.isPublished;
+    },
+  },
 });
 
 //   model
@@ -23,17 +41,24 @@ const Course = mongoose.model("Course", courseSchema);
 // data entry
 async function addCourse() {
   const course = new Course({
-    name: "DBMS",
-    creator: "Kranthi",
+    name: "chat Gpt",
+    tags: ["AI"],
+    // category: "AI",
+    creator: "Q",
     isPublished: false,
-    rating: 3.8,
   });
-
-  const result = await course.save();
-  console.log(result);
+  try {
+    // await course.validate();
+    const result = await course.save();
+    console.log(result);
+  } catch (e) {
+    for (field in e.errors) {
+      console.log(e.errors[field]);
+    }
+  }
 }
 
-// addCourse();
+addCourse();
 
 /** get a particular course or filter out courses based on condition */
 
@@ -108,4 +133,4 @@ async function deleteCourse(id) {
   console.log(course);
 }
 
-deleteCourse("6475694784d146f9b965a71d");
+// deleteCourse("6475c6e093b2ffee096318ee");
